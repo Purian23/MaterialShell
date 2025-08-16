@@ -1,7 +1,9 @@
 # MaterialShell - AGS Latest Implementation
 
 ## Project Overview
-MaterialShell is a desktop shell built with the latest AGS (v2.3.0+) for the niri Wayland compositor, following Material Design 3 principles. This project is a port of the quickshell-based DankMaterialShell to the latest AGS framework using TypeScript with JSX and the new Astal+Gnim architecture.
+MaterialShell is a desktop shell built with the latest AGS (v2.3.0+) for the niri Wayland compositor, following Material Design 3 principles. This project is a port of the QuickShell-based **DankMaterialShell** (https://github.com/AvengeMedia/DankMaterialShell) to the latest AGS framework using TypeScript with JSX and the new Astal+Gnim architecture.
+
+**Source Project**: DankMaterialShell is a fully functional Material Design 3 shell for niri written in QuickShell/QML. This AGS port aims to recreate all functionality using native AGS v3 patterns while maintaining feature parity.
 
 ## AGS Version Policy
 **IMPORTANT**: This project always uses the latest AGS version from the GitHub repository (https://github.com/Aylur/ags) to ensure:
@@ -83,12 +85,16 @@ MaterialShell/
 - Import statements at the top, grouped logically
 - No unnecessary comments - code should be self-documenting
 
-### Widget Development
-- Use Astal/GTK3 widgets with JSX syntax
-- Leverage `halign` and `valign` for alignment with `Gtk.Align` enum
-- Implement proper error handling for external commands
-- Use `poll()` for periodic updates with Variable objects
-- Handle niri unavailability gracefully with generic compositor fallbacks
+### Widget Development - AGS v3 ONLY
+**CRITICAL**: Always use native AGS v3 patterns - never guess or use outdated examples
+- **Native GTK Components**: `Gtk.Box`, `Gtk.Button`, `Gtk.Label` from `ags/gtk4`
+- **State Management**: `createState` from `ags` - never custom implementations
+- **Process Integration**: `execAsync` from `ags/process` for niri commands
+- **Layer Shell**: `Astal.Layer.TOP`, `Astal.WindowAnchor`, `Astal.Exclusivity` enums
+- **Event Handlers**: Use native `onClicked` props, not custom event systems
+- **CSS Classes**: Use `class` not `className` in JSX
+- **Error Handling**: Always wrap external commands in try/catch with fallbacks
+- **Polling**: Use native `setInterval` for simple updates, not complex event streams
 
 ### Naming Conventions
 - PascalCase for widget files and components
@@ -169,63 +175,62 @@ MaterialShell/
 
 ## Common Patterns
 
-### AGS 2.0 Polling Services
-```typescript
-import { Variable, poll } from "astal"
-import { execAsync } from "astal/process"
+### AGS v3 State Management (WORKING)
+```tsx
+import { createState } from "ags"
+import { execAsync } from "ags/process"
 
-class ExampleService {
-  data = Variable("default")
-  
-  constructor() {
-    poll(5000, async () => {
-      try {
-        const result = await execAsync("command")
-        this.data.set(processResult(result))
-      } catch (error) {
-        this.data.set("fallback")
-      }
-    })
+// Simple reactive state
+const [currentTime, setCurrentTime] = createState("")
+const [currentWorkspace, setCurrentWorkspace] = createState(1)
+
+// Update with native patterns
+setInterval(() => {
+  const now = new Date()
+  setCurrentTime(now.toLocaleTimeString('en-US', { 
+    hour: 'numeric', minute: '2-digit', hour12: true 
+  }))
+}, 1000)
+
+// Niri integration
+async function switchToWorkspace(index: number) {
+  try {
+    await execAsync(`niri msg action focus-workspace ${index}`)
+    setCurrentWorkspace(index)
+  } catch (error) {
+    console.warn(`Failed to switch to workspace ${index}:`, error)
   }
 }
-
-export const exampleService = new ExampleService()
 ```
 
-### AGS 2.0 Widget Structure
+### AGS v3 Widget Structure (WORKING)
 ```tsx
-import { Box, Label } from "astal/gtk3/widget"
-import { bind } from "astal"
-import { exampleService } from "../services/example"
+import { Astal, Gtk } from "ags/gtk4"
+import { createState } from "ags"
 
-export default function MyWidget() {
+export default function TopBar(monitor = 0) {
   return (
-    <Box className="my-widget" halign={Gtk.Align.CENTER}>
-      <Label label={bind(exampleService.data)} className="widget-text" />
-    </Box>
-  )
-}
-```
-
-### Window with Layer Shell
-```tsx
-import { Window, Box } from "astal/gtk3/widget"
-import { App, Astal } from "astal/gtk3"
-
-export default function TopBar() {
-  return (
-    <Window
+    <window
       name="top-bar"
+      visible={true}
+      monitor={monitor}
+      layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      layer={Astal.Layer.TOP}
+      heightRequest={48}
     >
-      <Box className="bar" orientation={Gtk.Orientation.HORIZONTAL}>
-        {/* widgets */}
-      </Box>
-    </Window>
+      <Gtk.Box orientation={Gtk.Orientation.HORIZONTAL} class="bar-container">
+        <Gtk.Button 
+          class={currentWorkspace((ws) => `workspace-button ${ws === 1 ? 'active' : ''}`)}
+          onClicked={() => switchToWorkspace(1)}
+        >
+          <Gtk.Label label="1" class="workspace-label" />
+        </Gtk.Button>
+      </Gtk.Box>
+    </window>
   )
 }
+```
 ```
 
 ### Material 3 Styling
@@ -252,17 +257,22 @@ export default function TopBar() {
 - Expected 90%+ feature parity with latest AGS capabilities
 
 ## Implementation Status
-**Current Phase**: Foundation and Core Infrastructure
-- ✅ Project structure aligned with AGS v2.x+ patterns
-- ✅ TypeScript configuration for latest AGS
-- ✅ Basic component architecture established
-- 🔄 **Next**: Complete core UI components with latest Astal widgets
+**Current Phase**: Fully Functional Core Shell - Ready for Extension
+- ✅ AGS v3 native implementation working perfectly
+- ✅ Layer shell integration with niri compositor  
+- ✅ Clickable workspace switching with dynamic highlighting
+- ✅ Real-time clock and state management
+- ✅ Material 3 blue theme with proper styling
+- ✅ Hot reloading development workflow (`npm run dev`)
+- ✅ Error-resistant architecture with fallbacks
 
-Implementation follows AGS v2.x+ best practices:
-1. ✅ Foundation and core infrastructure  
-2. 🔄 Core UI components with Astal widgets
-3. ⏳ Advanced features using latest AGS APIs
-4. ⏳ System integration with new bundling system
-5. ⏳ Performance optimization with v2.x improvements
-6. ⏳ Testing and deployment with `ags bundle`
+**Proven Architecture Pattern**:
+1. ✅ **Native GTK Components**: `Gtk.Box`, `Gtk.Button`, `Gtk.Label`
+2. ✅ **Reactive State**: `createState` for all dynamic data
+3. ✅ **Process Integration**: `execAsync` for niri commands
+4. ✅ **Event Handling**: Native `onClicked` handlers
+5. ✅ **Layer Shell**: Proper `Astal` enum usage
+6. ✅ **Stable Polling**: `setInterval` for sync (not event streams)
+
+**Ready for Extension**: Focused window display, system tray, notifications, dock
 - CLAUDE.md

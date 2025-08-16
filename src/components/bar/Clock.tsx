@@ -1,4 +1,3 @@
-import { Gtk } from "ags/gtk4"
 import { createPoll } from "ags/time"
 
 const timeDisplay = createPoll("", 1000, () => {
@@ -21,16 +20,14 @@ const dateDisplay = createPoll("", 60000, () => {
 
 export default function Clock() {
   return (
-    <box class="clock-widget" orientation={Gtk.Orientation.VERTICAL}>
+    <box class="clock-widget" orientation="vertical">
       <label 
         class="clock-time" 
-        label={timeDisplay} 
-        halign={Gtk.Align.CENTER}
+        label={timeDisplay((time) => time)}
       />
       <label 
         class="clock-date" 
-        label={dateDisplay} 
-        halign={Gtk.Align.CENTER}
+        label={dateDisplay((date) => date)}
       />
     </box>
   )

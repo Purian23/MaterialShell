@@ -1,8 +1,6 @@
-import { Gtk } from "ags/gtk4"
 import { execAsync } from "ags/process"
 import { createPoll } from "ags/time"
-
-declare const GLib: any
+import GLib from "gi://GLib"
 
 const focusedWindowTitle = createPoll("Desktop", 1000, async () => {
   try {
@@ -23,10 +21,9 @@ export default function FocusedWindow() {
     <box class="focused-window-widget">
       <label 
         class="focused-window-title"
-        label={focusedWindowTitle}
+        label={focusedWindowTitle((title) => title)}
         maxWidthChars={50}
         ellipsize={3}
-        halign={Gtk.Align.START}
       />
     </box>
   )

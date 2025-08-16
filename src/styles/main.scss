@@ -1,13 +1,13 @@
 // Material 3 Blue Theme Colors (Default)
-$md-blue-primary: #6750a4;
+$md-blue-primary: #1976d2;
 $md-blue-on-primary: #ffffff;
-$md-blue-surface: #1c1b1f;
-$md-blue-on-surface: #e6e1e5;
-$md-blue-surface-variant: #49454f;
-$md-blue-on-surface-variant: #cab6d6;
-$md-blue-surface-container: #211f26;
-$md-blue-error: #f2b8b5;
-$md-blue-on-error: #601410;
+$md-blue-surface: #121212;
+$md-blue-on-surface: #ffffff;
+$md-blue-surface-variant: #2196f3;
+$md-blue-on-surface-variant: #ffffff;
+$md-blue-surface-container: #1e1e1e;
+$md-blue-error: #f44336;
+$md-blue-on-error: #ffffff;
 
 // Material 3 Purple Theme Colors  
 $md-purple-primary: #bb86fc;
@@ -25,41 +25,54 @@ $md-purple-on-error: #ffffff;
   font-family: "Inter", sans-serif;
 }
 
-// Use purple theme based on settings (this would be dynamic in a full implementation)
+// Use blue theme based on settings (this would be dynamic in a full implementation)
 .material-top-bar {
   background: $md-blue-surface-container;
   color: $md-blue-on-surface;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 32px;
 }
 
 .bar-container {
   padding: 8px 16px;
-  min-height: 40px;
+  min-height: 32px;
 }
 
 .section-start {
-  /* spacing will be handled by box widgets */
+  
+}
+
+.section-center {
+  
+}
+
+.section-end {
+  
 }
 
 .workspace-switcher {
-  /* spacing handled by box widgets */
   
   .workspace-button {
-    background: $md-blue-surface-variant;
-    color: $md-blue-on-surface-variant;
+    background: rgba($md-blue-surface-variant, 0.3);
+    color: rgba($md-blue-on-surface-variant, 0.5);
     border-radius: 12px;
     padding: 8px 16px;
-    border: none;
+    border: 1px solid rgba(255,255,255,0.1);
     transition: all 200ms ease;
-    min-width: 40px;
+    min-width: 28px;
+    min-height: 20px;
+    opacity: 0.6;
     
     &:hover {
       background: rgba(255, 255, 255, 0.08);
+      opacity: 0.8;
     }
     
     &.active {
       background: $md-blue-primary;
       color: $md-blue-on-primary;
+      opacity: 1.0;
+      border: 1px solid rgba(255,255,255,0.3);
       
       &:hover {
         opacity: 0.9;
@@ -87,17 +100,99 @@ $md-purple-on-error: #ffffff;
   100% { opacity: 1; }
 }
 
-.clock-widget {
-  padding: 4px 12px;
+.time-container {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: all 200ms ease;
   
-  .clock-time {
-    font-weight: 500;
-    font-size: 14px;
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
   }
   
-  .clock-date {
-    font-size: 12px;
-    opacity: 0.7;
+  .time-display {
+    
+  }
+  
+  .time-text {
+    font-weight: 500;
+    font-size: 14px;
+    color: $md-blue-on-surface;
+  }
+  
+  .date-text {
+    font-size: 11px;
+    color: rgba($md-blue-on-surface, 0.7);
+  }
+}
+
+.time-popover {
+  background: $md-blue-surface-container;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  
+  .popover-content {
+    padding: 12px;
+  }
+  
+  .material-calendar {
+    background: transparent;
+    color: $md-blue-on-surface;
+    border-radius: 8px;
+    min-width: 200px;
+    min-height: 200px;
+    
+    // Style the today date highlight
+    .today {
+      background: $md-blue-primary;
+      color: $md-blue-on-primary;
+      border-radius: 12px;
+      // border-radius: 50%;
+      font-weight: 600;
+    }
+    
+    // Style selected dates
+    .selected {
+      background: $md-blue-primary;
+      color: $md-blue-on-primary;
+      border-radius: 12px;
+      // border-radius: 50%;
+    }
+    
+    // Style hovered dates
+    .day:hover {
+      background: rgba($md-blue-primary, 0.3);
+      border-radius: 12px;
+      // border-radius: 50%;
+    }
+    
+    // Calendar grid styling
+    .day {
+      color: $md-blue-on-surface;
+      background: transparent;
+      border-radius: 12px;
+      // border-radius: 50%;
+      margin: 2px;
+      
+      &:selected {
+        background: $md-blue-primary;
+        color: $md-blue-on-primary;
+      }
+    }
+    
+    // Header styling
+    .header {
+      color: $md-blue-on-surface;
+      font-weight: 500;
+    }
+    
+    // Month/year label
+    .month {
+      color: $md-blue-on-surface;
+      font-weight: 500;
+    }
   }
 }
 
@@ -126,3 +221,83 @@ $md-purple-on-error: #ffffff;
   font-family: "Material Symbols Outlined";
   font-size: 20px;
 }
+
+// Calendar popup styling
+.calendar-popup {
+  background: $md-blue-surface-container;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.calendar-container {
+  padding: 16px;
+}
+
+.calendar-header {
+  margin-bottom: 12px;
+  
+  .calendar-nav {
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    color: $md-blue-on-surface;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+  
+  .calendar-month-year {
+    font-weight: 500;
+    font-size: 16px;
+    color: $md-blue-on-surface;
+  }
+}
+
+.calendar-day-headers {
+  margin-bottom: 8px;
+  
+  .calendar-day-header {
+    font-size: 12px;
+    color: rgba($md-blue-on-surface, 0.7);
+    font-weight: 500;
+  }
+}
+
+.calendar-grid {
+  .calendar-week {
+    
+  }
+  
+  .calendar-day {
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    min-width: 32px;
+    min-height: 32px;
+    color: $md-blue-on-surface;
+    transition: all 200ms ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    &.today {
+      background: $md-blue-primary;
+      color: $md-blue-on-primary;
+      font-weight: 600;
+      
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+    
+    &.empty {
+      opacity: 0;
+    }
+  }
+}
+

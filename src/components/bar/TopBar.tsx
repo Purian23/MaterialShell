@@ -1,6 +1,9 @@
 import { Astal, Gtk } from "ags/gtk4"
 import { createState } from "ags"
 import { execAsync } from "ags/process"
+import FocusedWindow from "../widgets/FocusedWindow"
+import SystemMonitor from "../widgets/SystemMonitor"
+import NetworkWidget from "../widgets/NetworkWidget"
 
 // Native state management
 const [currentTime, setCurrentTime] = createState("")
@@ -66,46 +69,59 @@ export default function TopBar(monitor = 0) {
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       heightRequest={48}
     >
-      <Gtk.Box orientation={Gtk.Orientation.HORIZONTAL} class="bar-container">
-        <Gtk.Box spacing={8} class="workspace-switcher">
-          <Gtk.Button 
-            class={currentWorkspace((ws) => `workspace-button ${ws === 1 ? 'active' : ''}`)}
-            onClicked={() => switchToWorkspace(1)}
-          >
-            <Gtk.Label label="1" class="workspace-label" />
-          </Gtk.Button>
-          <Gtk.Button 
-            class={currentWorkspace((ws) => `workspace-button ${ws === 2 ? 'active' : ''}`)}
-            onClicked={() => switchToWorkspace(2)}
-          >
-            <Gtk.Label label="2" class="workspace-label" />
-          </Gtk.Button>
-          <Gtk.Button 
-            class={currentWorkspace((ws) => `workspace-button ${ws === 3 ? 'active' : ''}`)}
-            onClicked={() => switchToWorkspace(3)}
-          >
-            <Gtk.Label label="3" class="workspace-label" />
-          </Gtk.Button>
-          <Gtk.Button 
-            class={currentWorkspace((ws) => `workspace-button ${ws === 4 ? 'active' : ''}`)}
-            onClicked={() => switchToWorkspace(4)}
-          >
-            <Gtk.Label label="4" class="workspace-label" />
-          </Gtk.Button>
-        </Gtk.Box>
-        <Gtk.Label label="Material Shell" hexpand />
-        <Gtk.MenuButton class="time-container">
-          <Gtk.Box class="time-display" orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
-            <Gtk.Label label={currentTime((time) => time)} class="time-text" />
-            <Gtk.Label label={currentDate((date) => date)} class="date-text" />
+      <Gtk.Grid class="bar-container" columnHomogeneous>
+        {/* Left Section - Column 0 */}
+        <Gtk.Box spacing={8} class="section-left" halign={Gtk.Align.START}>
+          <Gtk.Box spacing={8} class="workspace-switcher">
+            <Gtk.Button 
+              class={currentWorkspace((ws) => `workspace-button ${ws === 1 ? 'active' : ''}`)}
+              onClicked={() => switchToWorkspace(1)}
+            >
+              <Gtk.Label label="1" class="workspace-label" />
+            </Gtk.Button>
+            <Gtk.Button 
+              class={currentWorkspace((ws) => `workspace-button ${ws === 2 ? 'active' : ''}`)}
+              onClicked={() => switchToWorkspace(2)}
+            >
+              <Gtk.Label label="2" class="workspace-label" />
+            </Gtk.Button>
+            <Gtk.Button 
+              class={currentWorkspace((ws) => `workspace-button ${ws === 3 ? 'active' : ''}`)}
+              onClicked={() => switchToWorkspace(3)}
+            >
+              <Gtk.Label label="3" class="workspace-label" />
+            </Gtk.Button>
+            <Gtk.Button 
+              class={currentWorkspace((ws) => `workspace-button ${ws === 4 ? 'active' : ''}`)}
+              onClicked={() => switchToWorkspace(4)}
+            >
+              <Gtk.Label label="4" class="workspace-label" />
+            </Gtk.Button>
           </Gtk.Box>
-          <Gtk.Popover class="time-popover">
-            <Gtk.Box class="popover-content">
-              <Gtk.Calendar class="material-calendar" />
+          <FocusedWindow />
+        </Gtk.Box>
+
+        {/* Center Section - Column 1 */}
+        <Gtk.Box class="section-center" halign={Gtk.Align.CENTER}>
+          <Gtk.MenuButton class="time-container">
+            <Gtk.Box class="time-display" orientation={Gtk.Orientation.HORIZONTAL} spacing={8}>
+              <Gtk.Label label={currentTime((time) => time)} class="time-text" />
+              <Gtk.Label label={currentDate((date) => date)} class="date-text" />
             </Gtk.Box>
-          </Gtk.Popover>
-        </Gtk.MenuButton>
-      </Gtk.Box>
+            <Gtk.Popover class="time-popover">
+              <Gtk.Box class="popover-content">
+                <Gtk.Calendar class="material-calendar" />
+              </Gtk.Box>
+            </Gtk.Popover>
+          </Gtk.MenuButton>
+        </Gtk.Box>
+
+        {/* Right Section - Column 2 */}
+        <Gtk.Box spacing={8} class="section-right" halign={Gtk.Align.END}>
+          <NetworkWidget />
+          <SystemMonitor />
+        </Gtk.Box>
+      </Gtk.Grid>
     </Astal.Window>
   )
 }

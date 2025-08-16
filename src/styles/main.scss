@@ -38,7 +38,7 @@ $md-purple-on-error: #ffffff;
   min-height: 32px;
 }
 
-.section-start {
+.section-left {
   
 }
 
@@ -46,7 +46,7 @@ $md-purple-on-error: #ffffff;
   
 }
 
-.section-end {
+.section-right {
   
 }
 
@@ -203,6 +203,46 @@ $md-purple-on-error: #ffffff;
     font-weight: 400;
     opacity: 0.8;
     font-size: 13px;
+    color: $md-blue-on-surface;
+  }
+}
+
+.network-widget {
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba($md-blue-surface-variant, 0.3);
+  
+  .material-icon {
+    font-family: "Material Symbols Rounded";
+    font-size: 16px;
+    color: $md-blue-on-surface;
+  }
+  
+  .network-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: $md-blue-on-surface;
+    opacity: 0.8;
+  }
+}
+
+.system-monitor-widget {
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba($md-blue-surface-variant, 0.3);
+  
+  .material-icon {
+    font-family: "Material Symbols Rounded";
+    font-size: 16px;
+    opacity: 0.7;
+    color: $md-blue-on-surface;
+  }
+  
+  .metric-text {
+    font-size: 12px;
+    font-weight: 500;
+    color: $md-blue-on-surface;
+    min-width: 30px;
   }
 }
 
@@ -210,16 +250,21 @@ $md-purple-on-error: #ffffff;
   /* spacing handled by box widgets */
   
   .material-icon {
-    font-family: "Material Symbols Outlined";
+    font-family: "Material Symbols Rounded";
     font-size: 18px;
     opacity: 0.7;
   }
 }
 
-// Material Icons support
+// Material Symbols support
 .material-icon {
-  font-family: "Material Symbols Outlined";
+  font-family: "Material Symbols Rounded";
   font-size: 20px;
+  font-variation-settings: 
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
 }
 
 // Calendar popup styling

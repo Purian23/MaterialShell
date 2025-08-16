@@ -4,6 +4,8 @@ import { execAsync } from "ags/process"
 import FocusedWindow from "../widgets/FocusedWindow"
 import SystemMonitor from "../widgets/SystemMonitor"
 import NetworkWidget from "../widgets/NetworkWidget"
+import AppLauncher, { showLauncher, setShowLauncher } from "../widgets/AppLauncher"
+import ClipboardWidget from "../widgets/ClipboardWidget"
 
 // Native state management
 const [currentTime, setCurrentTime] = createState("")
@@ -67,11 +69,17 @@ export default function TopBar(monitor = 0) {
       layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      heightRequest={48}
+      heightRequest={46}
     >
       <Gtk.Grid class="bar-container" columnHomogeneous>
         {/* Left Section - Column 0 */}
         <Gtk.Box spacing={8} class="section-left" halign={Gtk.Align.START}>
+          {/* App Launcher Button */}
+          <Gtk.MenuButton class="app-launcher-button">
+            <Gtk.Label label="apps" class="material-icon" />
+            <AppLauncher />
+          </Gtk.MenuButton>
+          
           <Gtk.Box spacing={8} class="workspace-switcher">
             <Gtk.Button 
               class={currentWorkspace((ws) => `workspace-button ${ws === 1 ? 'active' : ''}`)}
@@ -118,6 +126,7 @@ export default function TopBar(monitor = 0) {
 
         {/* Right Section - Column 2 */}
         <Gtk.Box spacing={8} class="section-right" halign={Gtk.Align.END}>
+          <ClipboardWidget />
           <NetworkWidget />
           <SystemMonitor />
         </Gtk.Box>

@@ -1,0 +1,308 @@
+// Material Design 3 (Material You) Theme - GTK Compatible - BLUE THEME
+// Color System - Material 3 Blue Dark Theme Colors
+$md-sys-color-primary: #42a5f5;
+$md-sys-color-on-primary: #ffffff;
+$md-sys-color-primary-container: #1976d2;
+$md-sys-color-on-primary-container: #ffffff;
+
+$md-sys-color-secondary: #8ab4f8;
+$md-sys-color-on-secondary: #1a1c1e;
+$md-sys-color-secondary-container: #1976d2;
+$md-sys-color-on-secondary-container: #ffffff;
+
+$md-sys-color-tertiary: #8ab4f8;
+$md-sys-color-on-tertiary: #1a1c1e;
+$md-sys-color-tertiary-container: #1976d2;
+$md-sys-color-on-tertiary-container: #ffffff;
+
+$md-sys-color-surface: #1a1c1e;
+$md-sys-color-on-surface: #e3e8ef;
+$md-sys-color-surface-variant: #44464f;
+$md-sys-color-on-surface-variant: #c4c7c5;
+
+$md-sys-color-surface-container-low: #1a1c1e;
+$md-sys-color-surface-container: #1e2023;
+$md-sys-color-surface-container-high: #292b2f;
+$md-sys-color-surface-container-highest: #292b2f;
+
+$md-sys-color-outline: #8e918f;
+$md-sys-color-outline-variant: #44464f;
+
+// Shape System - Material 3
+$md-sys-shape-corner-none: 0px;
+$md-sys-shape-corner-extra-small: 4px;
+$md-sys-shape-corner-small: 8px;
+$md-sys-shape-corner-medium: 12px;
+$md-sys-shape-corner-large: 16px;
+$md-sys-shape-corner-extra-large: 28px;
+
+// Main Bar Styling - Dark Theme
+window.material-bar {
+  background: transparent;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: $md-sys-color-on-surface;
+  
+  .bar-container {
+    background: $md-sys-color-surface-container-high;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5), 0px 4px 8px 3px rgba(0, 0, 0, 0.3);
+    border-radius: $md-sys-shape-corner-medium;
+    margin: 4px 8px;
+    padding: 4px 12px;
+    min-height: 30px;
+    border: 1px solid $md-sys-color-outline-variant;
+  }
+}
+
+// Section Layouts
+.section-start,
+.section-center,
+.section-end {
+  margin: 0 8px;
+}
+
+// FAB Button (Material 3 Floating Action Button) - Dark Theme
+.fab-button {
+  background: $md-sys-color-primary-container;
+  color: $md-sys-color-on-primary-container;
+  border-radius: $md-sys-shape-corner-small;
+  border: none;
+  padding: 4px 6px;
+  min-width: 28px;
+  min-height: 24px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5), 0px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  
+  &:hover {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6), 0px 2px 8px 2px rgba(0, 0, 0, 0.4);
+    background: rgba(208, 188, 255, 0.16); // Primary with 16% overlay
+  }
+  
+  &:active {
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5), 0px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    background: rgba(208, 188, 255, 0.12); // Primary with 12% overlay
+  }
+  
+  .fab-content {
+    margin: 0;
+    
+    .material-icon {
+      margin: 0 auto;
+      padding: 0;
+    }
+  }
+}
+
+// Status Chip (Material 3 Filter Chip) - Dark Theme
+.status-chip {
+  background: $md-sys-color-surface-container-highest;
+  color: $md-sys-color-on-surface-variant;
+  border: 1px solid $md-sys-color-outline-variant;
+  border-radius: $md-sys-shape-corner-small;
+  padding: 2px 8px;
+  min-height: 20px;
+  
+  &:hover {
+    background: $md-sys-color-surface-container-highest;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5), 0px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    border-color: $md-sys-color-outline;
+  }
+  
+  &:active {
+    background: rgba(230, 224, 233, 0.08); // On-surface with 8% overlay
+  }
+  
+  .chip-content {
+    margin: 0;
+  }
+  
+  .chip-text {
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 4px;
+    color: $md-sys-color-on-surface-variant;
+  }
+}
+
+// Material Icons (using Material Symbols font - GTK Compatible)
+.material-icon {
+  font-family: 'Material Symbols Rounded';
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  -gtk-icon-style: symbolic;
+}
+
+// FAB icons should be more prominent
+.fab-button .material-icon {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+// Status chip icons
+.status-chip .material-icon {
+  font-size: 14px;
+}
+
+// Quick action icons
+.quick-action-btn .material-icon {
+  font-size: 16px;
+}
+
+// Time Container - Dark Theme
+.time-container {
+  background: transparent;
+  border: none;
+  padding: 2px 8px;
+  
+  &:hover {
+    background: $md-sys-color-surface-container;
+    border-radius: $md-sys-shape-corner-small;
+  }
+}
+
+.time-display {
+  margin: 0;
+}
+
+.time-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: $md-sys-color-on-surface;
+  margin-right: 4px;
+}
+
+.date-text {
+  font-size: 10px;
+  font-weight: 400;
+  color: $md-sys-color-on-surface-variant;
+}
+
+// Popover Styling - Dark Theme
+.time-popover {
+  background: $md-sys-color-surface-container;
+  border: 1px solid $md-sys-color-outline-variant;
+  border-radius: $md-sys-shape-corner-large;
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.4), 0px 1px 3px rgba(0, 0, 0, 0.6);
+  padding: 16px;
+  
+  .popover-content {
+    margin: 0;
+  }
+}
+
+// Material Calendar - Dark Theme
+.material-calendar {
+  background: transparent;
+  color: $md-sys-color-on-surface;
+  
+  selection {
+    background: $md-sys-color-primary;
+    color: $md-sys-color-on-primary;
+  }
+  
+  header {
+    color: $md-sys-color-on-surface;
+    font-weight: 500;
+  }
+}
+
+// Quick Actions - Dark Theme
+.quick-actions {
+  margin: 16px 0 0 0;
+}
+
+.quick-action-btn {
+  background: $md-sys-color-surface-container-highest;
+  color: $md-sys-color-on-surface-variant;
+  border: none;
+  border-radius: $md-sys-shape-corner-medium;
+  padding: 12px;
+  min-width: 48px;
+  min-height: 48px;
+  margin: 0 4px;
+  
+  &:hover {
+    background: rgba(230, 224, 233, 0.08); // On-surface with 8% overlay
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5), 0px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  }
+  
+  &:active {
+    background: rgba(230, 224, 233, 0.12); // On-surface with 12% overlay
+  }
+}
+
+// Workspace Switcher - Material 3 Design
+.workspace-switcher {
+  margin: 0 8px;
+}
+
+.workspace-button {
+  background: transparent;
+  border: 1px solid $md-sys-color-outline-variant;
+  border-radius: $md-sys-shape-corner-small;
+  min-width: 32px;
+  min-height: 24px;
+  padding: 4px 8px;
+  color: $md-sys-color-on-surface-variant;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba($md-sys-color-on-surface, 0.08);
+    border-color: $md-sys-color-outline;
+  }
+  
+  &.active {
+    background: $md-sys-color-secondary-container;
+    border-color: $md-sys-color-secondary;
+    color: $md-sys-color-on-secondary-container;
+    
+    &:hover {
+      background: rgba($md-sys-color-secondary, 0.16);
+    }
+  }
+  
+  &.has-windows:not(.active) {
+    background: rgba($md-sys-color-primary, 0.08);
+    border-color: $md-sys-color-primary;
+    color: $md-sys-color-primary;
+    
+    &:hover {
+      background: rgba($md-sys-color-primary, 0.12);
+    }
+  }
+  
+  &.urgent {
+    background: $md-sys-color-tertiary-container;
+    border-color: $md-sys-color-tertiary;
+    color: $md-sys-color-on-tertiary-container;
+    animation: urgent-pulse 1s ease-in-out infinite alternate;
+    
+    &:hover {
+      background: rgba($md-sys-color-tertiary, 0.16);
+    }
+  }
+  
+  .workspace-label {
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+@keyframes urgent-pulse {
+  from {
+    box-shadow: 0 0 0 0 rgba($md-sys-color-tertiary, 0.4);
+  }
+  to {
+    box-shadow: 0 0 0 4px rgba($md-sys-color-tertiary, 0);
+  }
+}
+
+// Smooth transitions
+button {
+  transition: all 0.2s ease;
+}
+
+.bar-container {
+  transition: all 0.2s ease;
+}

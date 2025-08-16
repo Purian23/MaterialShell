@@ -1,0 +1,74 @@
+import app from "ags/gtk4/app"
+import { Astal, Gtk, Gdk } from "ags/gtk4"
+import { execAsync } from "ags/process"
+import { createPoll } from "ags/time"
+
+// Simple WiFi status polling
+const wifiInfo = createPoll("WiFi: Checking...", 5000, async () => {
+  try {
+    // Get active connections and check for wifi
+    const activeConns = await execAsync("nmcli connection show --active")
+    const wifiLines = activeConns.split('\n').filter(line => line.includes('wifi'))
+    
+    if (wifiLines.length > 0) {
+      // Get the first WiFi connection name
+      const firstWifiLine = wifiLines[0]
+      const connectionName = firstWifiLine.split(/\s+/)[0]
+      return `📶 ${connectionName}`
+    }
+    
+    // Check if WiFi radio is on
+    const radioState = await execAsync("nmcli radio wifi")
+    if (radioState.trim() === "enabled") {
+      return "📵 WiFi Available"
+    } else {
+      return "📵 WiFi Off"
+    }
+  } catch (error) {
+    return "⚠️ WiFi Error"
+  }
+})
+
+export default function Bar(gdkmonitor: Gdk.Monitor) {
+  const time = createPoll("", 1000, "date")
+  const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
+
+  return (
+    <window
+      visible
+      name="bar"
+      class="Bar"
+      gdkmonitor={gdkmonitor}
+      exclusivity={Astal.Exclusivity.EXCLUSIVE}
+      anchor={TOP | LEFT | RIGHT}
+      application={app}
+    >
+      <centerbox cssName="centerbox">
+        <button
+          $type="start"
+          tooltipText="Welcome Button"
+          onClicked={() => execAsync("echo hello").then(console.log)}
+          hexpand
+          halign={Gtk.Align.CENTER}
+        >
+          <label label="Welcome to AGS!" />
+        </button>
+        <box $type="center">
+          <button 
+            tooltipText="WiFi Status - Click to scan"
+            onClicked={() => execAsync("nmcli device wifi").then(console.log)}
+            class="wifi-button"
+          >
+            <label label={wifiInfo} />
+          </button>
+        </box>
+        <menubutton $type="end" hexpand halign={Gtk.Align.CENTER}>
+          <label label={time} />
+          <popover>
+            <Gtk.Calendar />
+          </popover>
+        </menubutton>
+      </centerbox>
+    </window>
+  )
+}

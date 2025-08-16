@@ -1,7 +1,21 @@
 {
+  "name": "dank-material-shell-ags",
+  "version": "1.0.0",
+  "description": "Material Design 3 desktop shell for niri compositor built with AGS 2.0",
+  "main": "app.tsx",
+  "scripts": {
+    "dev": "GI_TYPELIB_PATH=/usr/local/lib64/girepository-1.0:$GI_TYPELIB_PATH LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH ags run .",
+    "build": "tsc",
+    "test": "GI_TYPELIB_PATH=/usr/local/lib64/girepository-1.0:$GI_TYPELIB_PATH LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH ags run . --inspector",
+    "run": "GI_TYPELIB_PATH=/usr/local/lib64/girepository-1.0:$GI_TYPELIB_PATH LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH ags run .",
+    "bundle": "GI_TYPELIB_PATH=/usr/local/lib64/girepository-1.0:$GI_TYPELIB_PATH LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH ags bundle .",
+    "stop": "pkill -f 'ags.*MaterialShell' || echo 'No MaterialShell instances running'",
+    "inspect": "GI_TYPELIB_PATH=/usr/local/lib64/girepository-1.0:$GI_TYPELIB_PATH LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH ags inspect"
+  },
   "dependencies": {
     "ags": "*",
-    "gnim": "*"
+    "gnim": "*",
+    "fuse.js": "^7.0.0"
   },
   "prettier": {
     "semi": false,
@@ -9,6 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "sass": "^1.77.0"
   }
 }

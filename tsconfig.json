@@ -6,9 +6,26 @@
     "target": "ES2020",
     "lib": ["ES2023"],
     "moduleResolution": "Bundler",
-    // "checkJs": true,
-    // "allowJs": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "ags/gtk4"
-  }
+    "jsxImportSource": "ags/gtk4",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "outDir": "./dist",
+    "rootDir": "./",
+    "declaration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*",
+    "app.tsx",
+    "*.ts",
+    "*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

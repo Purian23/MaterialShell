@@ -1,0 +1,28 @@
+{
+  "topBarWidgets": [
+    "workspaces",
+    "focused-window", 
+    "spacer",
+    "system-tray",
+    "clock"
+  ],
+  "pinnedApps": [
+    "firefox.desktop",
+    "org.gnome.Nautilus.desktop",
+    "code.desktop"
+  ],
+  "theme": {
+    "mode": "dark",
+    "color": "blue"
+  },
+  "dock": {
+    "enabled": true,
+    "position": "bottom",
+    "autohide": false
+  },
+  "notifications": {
+    "enabled": true,
+    "timeout": 5000,
+    "position": "top-right"
+  }
+}

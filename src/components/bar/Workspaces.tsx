@@ -29,17 +29,6 @@ const workspaces = createPoll([] as NiriWorkspace[], 500, async () => {
   }
 })
 
-// Get the current output/monitor name
-const currentOutput = createPoll("default", 2000, async () => {
-  try {
-    const output = await execAsync("niri msg -j focused-output")
-    const focusedOutput = JSON.parse(output)
-    return focusedOutput.name || "default"
-  } catch (error) {
-    return "default"
-  }
-})
-
 // Switch to a specific workspace
 async function switchToWorkspace(index: number) {
   try {
@@ -69,8 +58,7 @@ function WorkspaceButton({ workspace }: { workspace: NiriWorkspace }) {
   )
 }
 
-
-export default function WorkspaceSwitcher() {
+export default function Workspaces() {
   // Static workspaces for now - we'll make them dynamic later
   const staticWorkspaces: NiriWorkspace[] = [
     {

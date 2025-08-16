@@ -1,0 +1,128 @@
+// Material 3 Blue Theme Colors (Default)
+$md-blue-primary: #6750a4;
+$md-blue-on-primary: #ffffff;
+$md-blue-surface: #1c1b1f;
+$md-blue-on-surface: #e6e1e5;
+$md-blue-surface-variant: #49454f;
+$md-blue-on-surface-variant: #cab6d6;
+$md-blue-surface-container: #211f26;
+$md-blue-error: #f2b8b5;
+$md-blue-on-error: #601410;
+
+// Material 3 Purple Theme Colors  
+$md-purple-primary: #bb86fc;
+$md-purple-on-primary: #000000;
+$md-purple-surface: #1c1b1f;
+$md-purple-on-surface: #e6e1e5;
+$md-purple-surface-variant: #49454f;
+$md-purple-on-surface-variant: #cab6d6;
+$md-purple-surface-container: #211f26;
+$md-purple-error: #cf6679;
+$md-purple-on-error: #ffffff;
+
+* {
+  all: unset;
+  font-family: "Inter", sans-serif;
+}
+
+// Use purple theme based on settings (this would be dynamic in a full implementation)
+.material-top-bar {
+  background: $md-blue-surface-container;
+  color: $md-blue-on-surface;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bar-container {
+  padding: 8px 16px;
+  min-height: 40px;
+}
+
+.section-start {
+  /* spacing will be handled by box widgets */
+}
+
+.workspace-switcher {
+  /* spacing handled by box widgets */
+  
+  .workspace-button {
+    background: $md-blue-surface-variant;
+    color: $md-blue-on-surface-variant;
+    border-radius: 12px;
+    padding: 8px 16px;
+    border: none;
+    transition: all 200ms ease;
+    min-width: 40px;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    &.active {
+      background: $md-blue-primary;
+      color: $md-blue-on-primary;
+      
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+    
+    &.has-windows {
+      border: 2px solid $md-blue-primary;
+    }
+    
+    &.urgent {
+      background: $md-blue-error;
+      color: $md-blue-on-error;
+    }
+    
+    .workspace-label {
+      font-weight: 500;
+    }
+  }
+}
+
+@keyframes urgentPulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.clock-widget {
+  padding: 4px 12px;
+  
+  .clock-time {
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .clock-date {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+}
+
+.focused-window-widget {
+  margin: 0 16px;
+  
+  .focused-window-title {
+    font-weight: 400;
+    opacity: 0.8;
+    font-size: 13px;
+  }
+}
+
+.system-tray-widget {
+  /* spacing handled by box widgets */
+  
+  .material-icon {
+    font-family: "Material Symbols Outlined";
+    font-size: 18px;
+    opacity: 0.7;
+  }
+}
+
+// Material Icons support
+.material-icon {
+  font-family: "Material Symbols Outlined";
+  font-size: 20px;
+}
